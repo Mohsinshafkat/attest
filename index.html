@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BSTE – Board of Science and Technology Education</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+</head>
+<body>
+
+  <!-- ========================================================
+       HEADER
+       ======================================================== -->
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="site-title">
+        BSTE
+        <span>Board of Science &amp; Technology Education</span>
+      </div>
+
+      <!-- Desktop Nav -->
+      <nav class="main-nav" aria-label="Main navigation">
+        <a href="#home"     class="active">Home</a>
+        <a href="#courses">Courses</a>
+        <a href="verification.html">Verification</a>
+        <a href="#about">About</a>
+      </nav>
+
+      <!-- Hamburger -->
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+
+    <!-- Mobile Nav -->
+    <nav class="mobile-nav" id="mobileNav" aria-label="Mobile navigation">
+      <a href="#home">Home</a>
+      <a href="#courses">Courses</a>
+      <a href="verification.html">Verification</a>
+      <a href="#about">About</a>
+    </nav>
+  </header>
+
+  <!-- ========================================================
+       ANNOUNCEMENT BAND
+       ======================================================== -->
+  <div class="notice-band" role="marquee">
+    <div class="notice-inner">
+      <span class="notice-tag">Notice</span>
+      <p class="notice-text">
+        Admissions open for Session 2024–2025 &nbsp;|&nbsp;
+        Result of DAE Annual Examination 2023 has been published &nbsp;|&nbsp;
+        Duplicate certificate issuance: apply through regional office &nbsp;|&nbsp;
+        New batch commencement: August 1, 2025
+      </p>
+    </div>
+  </div>
+
+  <!-- ========================================================
+       HERO SECTION
+       ======================================================== -->
+  <section class="hero" id="home">
+    <div class="hero-content">
+      <span class="hero-badge">Official Portal — BSTE Pakistan</span>
+      <h1>Welcome to BSTE</h1>
+      <p>Empowering Technical Education and Skills Development across the nation — building tomorrow's workforce today.</p>
+      <a href="#courses" class="btn btn-primary">
+        <!-- Arrow icon -->
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        Explore Courses
+      </a>
+
+      <!-- Stats -->
+      <div class="hero-stats">
+        <div class="stat-item"><strong>10,000+</strong><span>Students Enrolled</span></div>
+        <div class="stat-item"><strong>03</strong><span>Diploma Programs</span></div>
+        <div class="stat-item"><strong>50+</strong><span>Affiliated Institutes</span></div>
+        <div class="stat-item"><strong>15+</strong><span>Years of Excellence</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================
+       COURSES SECTION
+       ======================================================== -->
+  <section class="section" id="courses">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-label">Our Programs</span>
+        <h2>Diploma of Associate Engineering</h2>
+        <p>Industry-aligned technical programs designed to equip students with practical skills and theoretical knowledge.</p>
+      </div>
+
+      <div class="courses-grid">
+
+        <!-- Card 1: Electrical -->
+        <article class="course-card">
+          <div class="card-accent"></div>
+          <div class="card-body">
+            <div class="card-icon">⚡</div>
+            <span class="card-tag">03 Years Program</span>
+            <h3>DAE Electrical</h3>
+            <p>Covers electrical circuits, power systems, electronics, and industrial automation. Prepares graduates for power generation, distribution, and electrical maintenance roles.</p>
+            <div class="card-meta">
+              <!-- Clock icon -->
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              Duration: 3 Years (6 Semesters)
+            </div>
+          </div>
+        </article>
+
+        <!-- Card 2: Mechanical -->
+        <article class="course-card">
+          <div class="card-accent"></div>
+          <div class="card-body">
+            <div class="card-icon">⚙️</div>
+            <span class="card-tag">03 Years Program</span>
+            <h3>DAE Mechanical</h3>
+            <p>Focuses on machine design, thermodynamics, manufacturing processes, and industrial mechanics. Ideal for careers in automotive, manufacturing, and maintenance sectors.</p>
+            <div class="card-meta">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              Duration: 3 Years (6 Semesters)
+            </div>
+          </div>
+        </article>
+
+        <!-- Card 3: Civil -->
+        <article class="course-card">
+          <div class="card-accent"></div>
+          <div class="card-body">
+            <div class="card-icon">🏗️</div>
+            <span class="card-tag">02 Years Program</span>
+            <h3>DAE Civil</h3>
+            <p>Encompasses structural engineering basics, construction materials, surveying, and project management. Graduates work in construction, infrastructure development, and urban planning.</p>
+            <div class="card-meta">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              Duration: 2 Years (4 Semesters)
+            </div>
+          </div>
+        </article>
+
+      </div><!-- /.courses-grid -->
+    </div>
+  </section>
+
+  <!-- ========================================================
+       WHY BSTE
+       ======================================================== -->
+  <section class="section section-alt">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-label">Why Choose Us</span>
+        <h2>A Legacy of Technical Excellence</h2>
+        <p>BSTE has been at the forefront of technical education, committed to quality, integrity, and student success.</p>
+      </div>
+
+      <div class="features-grid">
+        <div class="feature-item">
+          <span class="feature-icon">🏛️</span>
+          <h4>Accredited Board</h4>
+          <p>Fully recognized and accredited institution ensuring your diploma holds national validity and professional value.</p>
+        </div>
+        <div class="feature-item">
+          <span class="feature-icon">🔬</span>
+          <h4>Practical Training</h4>
+          <p>Hands-on laboratory sessions, workshops, and industry visits integrated throughout the curriculum.</p>
+        </div>
+        <div class="feature-item">
+          <span class="feature-icon">✅</span>
+          <h4>Digital Verification</h4>
+          <p>Instant online certificate verification system to confirm the authenticity of BSTE credentials anywhere.</p>
+        </div>
+        <div class="feature-item">
+          <span class="feature-icon">🎓</span>
+          <h4>Career Support</h4>
+          <p>Dedicated placement assistance and career counseling to help graduates transition smoothly into the workforce.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================
+       VERIFICATION CTA
+       ======================================================== -->
+  <section class="section" style="background: var(--green); text-align: center; padding: 4rem 2rem;">
+    <div class="container">
+      <p style="font-size:.8rem; letter-spacing:.12em; text-transform:uppercase; color:var(--yellow); font-weight:700; margin-bottom:.75rem;">Credential Verification</p>
+      <h2 style="font-family:var(--font-display); font-size:clamp(1.5rem,3vw,2.2rem); color:var(--white); margin-bottom:1rem; line-height:1.2;">Verify a BSTE Certificate Online</h2>
+      <p style="color:rgba(255,255,255,.8); max-width:520px; margin:0 auto 2rem; font-size:1rem;">Employers and institutions can instantly verify the authenticity of any BSTE issued diploma or certificate.</p>
+      <a href="verification.html" class="btn btn-primary">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
+        Verify Certificate Now
+      </a>
+    </div>
+  </section>
+
+  <!-- ========================================================
+       FOOTER / ABOUT
+       ======================================================== -->
+  <footer class="site-footer" id="about">
+    <div class="footer-top">
+
+      <!-- Brand / About -->
+      <div class="footer-brand">
+        <h3>BSTE</h3>
+        <p class="tagline">Board of Science &amp; Technology Education</p>
+        <p>
+          BSTE is the regulatory authority responsible for conducting and supervising technical education examinations,
+          issuing diplomas, and maintaining academic standards across affiliated institutes. We are committed to
+          producing skilled, industry-ready graduates who contribute to national development.
+        </p>
+      </div>
+
+      <!-- Quick Links -->
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="#home">Home</a></li>
+          <li><a href="#courses">Courses</a></li>
+          <li><a href="verification.html">Certificate Verification</a></li>
+          <li><a href="#about">About BSTE</a></li>
+          <li><a href="#">Examination Schedule</a></li>
+          <li><a href="#">Download Forms</a></li>
+        </ul>
+      </div>
+
+      <!-- Contact -->
+      <div class="footer-col">
+        <h4>Contact Us</h4>
+        <div class="contact-line"><strong>Address:</strong> Board Office, Technical Education Block, City — Pakistan</div>
+        <div class="contact-line"><strong>Phone:</strong> +92-XXX-XXXXXXX</div>
+        <div class="contact-line"><strong>Email:</strong> info@bste.edu.pk</div>
+        <div class="contact-line"><strong>Hours:</strong> Mon–Fri, 9:00 AM – 5:00 PM</div>
+      </div>
+
+    </div>
+
+    <div class="footer-bottom">
+      <p>&copy; 2024 BSTE – Board of Science and Technology Education. All rights reserved.</p>
+      <span>Designed for official use only</span>
+    </div>
+  </footer>
+
+  <!-- ========================================================
+       JAVASCRIPT
+       ======================================================== -->
+  <script>
+    // Hamburger toggle
+    const hamburger = document.getElementById('hamburger');
+    const mobileNav = document.getElementById('mobileNav');
+    hamburger.addEventListener('click', () => {
+      const isOpen = mobileNav.classList.toggle('open');
+      hamburger.classList.toggle('open', isOpen);
+      hamburger.setAttribute('aria-expanded', isOpen);
+    });
+
+    // Close mobile nav on link click
+    mobileNav.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => {
+        mobileNav.classList.remove('open');
+        hamburger.classList.remove('open');
+        hamburger.setAttribute('aria-expanded', 'false');
+      });
+    });
+
+    // Active nav on scroll
+    const sections = document.querySelectorAll('[id]');
+    const navLinks = document.querySelectorAll('.main-nav a[href^="#"]');
+    window.addEventListener('scroll', () => {
+      let cur = '';
+      sections.forEach(s => { if (window.scrollY >= s.offsetTop - 100) cur = s.id; });
+      navLinks.forEach(l => {
+        l.classList.toggle('active', l.getAttribute('href') === '#' + cur);
+      });
+    });
+  </script>
+
+</body>
+</html>

@@ -3,152 +3,121 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Certificate – BSTE</title>
-  <style>
-    /* Full Screen Setup */
-    html, body {
-      height: 100%;
-      margin: 0;
-      padding: 0;
-      overflow: hidden; /* Scrollbar ko khatam karne ke liye */
-    }
-    
-    body {
-      font-family: Arial, sans-serif;
-      background: #525659; /* PDF viewer jaisa professional dark background */
-      display: flex;
-      flex-direction: column;
-    }
-
-    /* Top bar fixed height */
-    .topbar {
-      background: #124d2b;
-      color: #fff;
-      padding: 10px 20px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      height: 60px;
-      flex-shrink: 0;
-      z-index: 100;
-    }
-    .topbar-brand { font-size: 1.1rem; font-weight: bold; }
-    .topbar-brand span { display: block; font-size: .65rem; opacity: 0.8; text-transform: uppercase; }
-    .back-link { color: #f5c518; font-size: 0.85rem; font-weight: bold; text-decoration: none; }
-
-    /* Download bar fixed height */
-    .download-bar {
-      background: #1a6b3c;
-      padding: 8px 20px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      height: 50px;
-      flex-shrink: 0;
-      border-bottom: 1px solid rgba(0,0,0,0.1);
-    }
-    .download-bar p { color: #fff; margin: 0; font-size: 0.9rem; }
-    .btn-dl { 
-      background: #f5c518; 
-      color: #111; 
-      padding: 6px 15px; 
-      border-radius: 4px; 
-      text-decoration: none; 
-      font-weight: bold; 
-      font-size: 0.85rem; 
-    }
-
-    /* PDF Section: Baki bachi hui poori screen occupy karega */
-    .pdf-wrap {
-      flex-grow: 1; 
-      display: flex;
-      flex-direction: column;
-      width: 100%;
-      height: calc(100vh - 110px); /* Total height minus (topbar + downloadbar) */
-    }
-
-    iframe {
-      width: 100%;
-      height: 100%;
-      border: none;
-    }
-
-    /* Error Centering */
-    .error-wrap {
-      flex: 1;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: #f0f4f0;
-    }
-    .error-box {
-      background: #fff;
-      padding: 30px;
-      border-radius: 8px;
-      text-align: center;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-      max-width: 400px;
-    }
-  </style>
+  <title>Verification Result – BSTE</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-  <div class="topbar">
-    <div class="topbar-brand">BSTE <span>Board of Science & Technology Education</span></div>
-    <a href="verification.html" class="back-link">← Back</a>
-  </div>
-
-  <div id="pdfSection" class="pdf-wrap" style="display:none;">
-    <div class="download-bar">
-      <p>Roll No: <strong id="rollLabel" style="color:#f5c518"></strong> — Certificate</p>
-      <a id="downloadBtn" href="#" download class="btn-dl">Download PDF</a>
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="site-title">BSTE <span>Board of Science &amp; Technology Education</span></div>
+      <nav class="main-nav">
+        <a href="index.html">Home</a>
+        <a href="verification.html" class="active">Verification</a>
+      </nav>
     </div>
-    <iframe id="pdfFrame" src=""></iframe>
-  </div>
+  </header>
 
-  <div id="errorSection" class="error-wrap" style="display:none;">
-    <div class="error-box">
-      <h2 id="errorTitle" style="color:#c0392b; margin-bottom:10px;">Not Found</h2>
-      <p id="errorMsg" style="color:#666; margin-bottom:20px;">Details do not match.</p>
-      <a href="verification.html" class="btn-dl" style="display:inline-block; text-align:center;">Go Back</a>
+  <section class="page-hero">
+    <div class="page-hero-content">
+      <span class="hero-badge">Verification Result</span>
+      <h1>Certificate Verification Sheet</h1>
     </div>
-  </div>
+  </section>
+
+  <section class="result-section">
+    <div class="result-container">
+      <a href="verification.html" class="back-link">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        Back to Verification
+      </a>
+
+      <div id="invalidMsg" style="display:none;" class="error-msg-box">
+        ⚠️ Record not found or invalid details. Please <a href="verification.html">search again</a>.
+      </div>
+
+      <div class="result-card" id="resultCard" style="display:none;">
+        <div class="result-header">
+          <div class="result-header-title">
+            <h2>BSTE – Official Verification Record</h2>
+            <span>Document ID: <span id="docId"></span></span>
+          </div>
+          <span class="verified-badge">Verified</span>
+        </div>
+
+        <div class="result-body">
+          <p class="marks-title">Student Information</p>
+          <div class="info-grid">
+            <div class="info-cell"><label>Student Name</label><span id="studentName"></span></div>
+            <div class="info-cell"><label>Roll Number</label><span id="rollNo"></span></div>
+            <div class="info-cell"><label>Father's Name</label><span id="fatherName"></span></div>
+            <div class="info-cell"><label>Session</label><span id="session"></span></div>
+            <div class="info-cell"><label>Registration No.</label><span id="regNo"></span></div>
+            <div class="info-cell"><label>Field of Study</label><span id="field"></span></div>
+          </div>
+
+          <p class="marks-title">Academic Performance</p>
+          <div class="marks-grid">
+            <div class="mark-item"><label>Total Marks</label><span id="totalMarks"></span></div>
+            <div class="mark-item"><label>Obtained</label><span id="obtained"></span></div>
+            <div class="mark-item"><label>Percentage</label><span id="percentage"></span></div>
+            <div class="mark-item"><label>Grade</label><span id="grade"></span></div>
+          </div>
+        </div>
+
+        <div class="result-footer" style="padding: 2rem; text-align: center; border-top: 1px solid #eee;">
+            <p style="font-size: 0.85rem; color: #666; margin-bottom: 1rem;">Official digital copy of the certificate is available below:</p>
+            <a id="pdfDownloadBtn" href="#" download class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 0.5rem; text-decoration: none;">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                Download Official Certificate (PDF)
+            </a>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <script>
-    const STUDENTS = { '90625_2023': true, '12345_2023': true, '12346_2024': true };
-
-    function showError(title, msg) {
-      document.getElementById('pdfSection').style.display = 'none';
-      document.getElementById('errorTitle').textContent = title;
-      document.getElementById('errorMsg').textContent = msg;
-      document.getElementById('errorSection').style.display = 'flex';
-    }
+    const STUDENTS = {
+      '90625_2025': { name: 'Muhammad Ali Khan', fatherName: 'Abdul Rehman', rollNo: '90625', session: '2022-25', regNo: 'BSTE-EL-892', field: 'DAE Electrical', totalMarks: '3000', obtained: '2456', percentage: '81%', grade: 'A', docId: 'BSTE-2025-90625' },
+      '90626_2024': { name: 'Zaid Ahmed', fatherName: 'Ahmed Raza', rollNo: '90626', session: '2021-24', regNo: 'BSTE-ME-456', field: 'DAE Mechanical', totalMarks: '3000', obtained: '2100', percentage: '70%', grade: 'B', docId: 'BSTE-2024-90626' },
+      '90627_2023': { name: 'Usman Ghani', fatherName: 'Ghulam Nabi', rollNo: '90627', session: '2020-23', regNo: 'BSTE-CV-112', field: 'DAE Civil', totalMarks: '3000', obtained: '2580', percentage: '86%', grade: 'A-1', docId: 'BSTE-2023-90627' },
+      '90628_2025': { name: 'Hamza Yusuf', fatherName: 'Yusuf Khan', rollNo: '90628', session: '2022-25', regNo: 'BSTE-EL-893', field: 'DAE Electrical', totalMarks: '3000', obtained: '2300', percentage: '76%', grade: 'B', docId: 'BSTE-2025-90628' },
+      '90629_2024': { name: 'Bilal Hassan', fatherName: 'Hassan Mehmood', rollNo: '90629', session: '2021-24', regNo: 'BSTE-ME-457', field: 'DAE Mechanical', totalMarks: '3000', obtained: '2700', percentage: '90%', grade: 'A-1', docId: 'BSTE-2024-90629' },
+      '90630_2023': { name: 'Omar Farooq', fatherName: 'Farooq Ahmed', rollNo: '90630', session: '2020-23', regNo: 'BSTE-CV-113', field: 'DAE Civil', totalMarks: '3000', obtained: '2250', percentage: '75%', grade: 'B', docId: 'BSTE-2023-90630' },
+      '90631_2025': { name: 'Abubakar Siddiq', fatherName: 'Siddiq Jan', rollNo: '90631', session: '2022-25', regNo: 'BSTE-EL-894', field: 'DAE Electrical', totalMarks: '3000', obtained: '2400', percentage: '80%', grade: 'A', docId: 'BSTE-2025-90631' },
+      '90632_2024': { name: 'Talha Junaid', fatherName: 'Junaid Khan', rollNo: '90632', session: '2021-24', regNo: 'BSTE-ME-458', field: 'DAE Mechanical', totalMarks: '3000', obtained: '2150', percentage: '71%', grade: 'B', docId: 'BSTE-2024-90632' },
+      '90633_2023': { name: 'Saad Bin Moazzam', fatherName: 'Moazzam Ali', rollNo: '90633', session: '2020-23', regNo: 'BSTE-CV-114', field: 'DAE Civil', totalMarks: '3000', obtained: '2610', percentage: '87%', grade: 'A-1', docId: 'BSTE-2023-90633' },
+      '90634_2025': { name: 'Mustafa Kamal', fatherName: 'Kamal Pasha', rollNo: '90634', session: '2022-25', regNo: 'BSTE-EL-895', field: 'DAE Electrical', totalMarks: '3000', obtained: '2520', percentage: '84%', grade: 'A', docId: 'BSTE-2025-90634' }
+    };
 
     const params = new URLSearchParams(window.location.search);
-    const roll = (params.get('roll') || '').trim();
-    const year = (params.get('year') || '').trim();
+    const roll = params.get('roll');
+    const year = params.get('year');
+    const key = roll + '_' + year;
 
-    if (!roll || !year || !STUDENTS[roll + '_' + year]) {
-      showError('Record Not Found', 'Aapka record database mein nahi mila.');
+    if (STUDENTS[key]) {
+      const s = STUDENTS[key];
+      document.getElementById('resultCard').style.display = 'block';
+      document.getElementById('studentName').textContent = s.name;
+      document.getElementById('rollNo').textContent = s.rollNo;
+      document.getElementById('fatherName').textContent = s.fatherName;
+      document.getElementById('session').textContent = s.session;
+      document.getElementById('regNo').textContent = s.regNo;
+      document.getElementById('field').textContent = s.field;
+      document.getElementById('totalMarks').textContent = s.totalMarks;
+      document.getElementById('obtained').textContent = s.obtained;
+      document.getElementById('percentage').textContent = s.percentage;
+      document.getElementById('grade').textContent = s.grade;
+      document.getElementById('docId').textContent = s.docId;
+
+      // PDF Setup (Assuming PDF is named like DAE-EL90625.pdf in Students/Pdf folder)
+      const pdfPath = 'Students/Pdf/DAE-EL' + s.rollNo + '.pdf';
+      const dlBtn = document.getElementById('pdfDownloadBtn');
+      dlBtn.href = pdfPath;
+      dlBtn.setAttribute('download', 'BSTE_Certificate_' + s.rollNo + '.pdf');
+
     } else {
-      // Path logic
-      const folderPath = 'Students/Pdf/';
-      const fileName = 'DAE-EL' + roll + '.pdf';
-      const pdfFile = folderPath + fileName;
-      
-      // GitHub check
-      fetch(pdfFile, { method: 'HEAD' }).then(res => {
-        if (!res.ok) throw new Error();
-        
-        document.getElementById('errorSection').style.display = 'none';
-        document.getElementById('pdfSection').style.display = 'flex';
-        document.getElementById('rollLabel').textContent = 'DAE-EL' + roll;
-        document.getElementById('pdfFrame').src = pdfFile;
-        document.getElementById('downloadBtn').href = pdfFile;
-        
-      }).catch(() => {
-        showError('File Not Found', 'PDF file (' + fileName + ') folder mein nahi mili.');
-      });
+      document.getElementById('invalidMsg').style.display = 'block';
     }
   </script>
 </body>

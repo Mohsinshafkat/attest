@@ -47,7 +47,7 @@
 
       <div class="form-group">
         <label for="rollNo">Roll Number</label>
-        <input type="text" id="rollNo" placeholder="e.g. 12345" autocomplete="off" inputmode="numeric" />
+        <input type="text" id="rollNo" placeholder="e.g. 90625" autocomplete="off" inputmode="numeric" />
       </div>
 
       <div class="form-group">
@@ -71,7 +71,7 @@
 
       <div class="hint-box">
         <strong>🔍 Demo Credentials</strong>
-        Use Roll No: <strong>12345</strong> and Passing Year: <strong>2023</strong> to see the verification result.
+        Use Roll No: <strong>90625</strong> and Passing Year: <strong>2023</strong> to see the result.
       </div>
     </div>
   </section>
@@ -84,40 +84,11 @@
   </footer>
 
   <script>
-    // ================================================================
-    // STUDENT DATABASE — naye students yahan add karein
-    // Key format: 'rollNo_year'
-    // PDF file naam: student{rollNo}.pdf  (root folder mein honi chahiye)
-    // ================================================================
+    // Database sync with Result.html
     const STUDENTS = {
-      '90625_2025': {
-        name:       'Muhammad Ali Khan',
-        fatherName: 'Abdul Rehman Khan',
-        rollNo:     '90625',
-        session:    '2022 – 2025',
-        regNo:      'BSTE-EL-2022-00892',
-        field:      'DAE – Electrical (03 Years)',
-        totalMarks: '3000',
-        obtained:   '2456',
-        percentage: '84%',
-        grade:      'A',
-        year:       '2025',
-        docId:      'BSTE-VR-2025-90625'
-      },
-      '12346_2024': {
-        name:       'Ahmad Raza',
-        fatherName: 'Muhammad Raza',
-        rollNo:     '12346',
-        session:    '2022 – 2024',
-        regNo:      'BSTE-ME-2022-00456',
-        field:      'DAE – Mechanical (03 Years)',
-        totalMarks: '1100',
-        obtained:   '880',
-        percentage: '80%',
-        grade:      'B+',
-        year:       '2024',
-        docId:      'BSTE-VR-2024-12346'
-      }
+      '90625_2023': true,
+      '12345_2023': true,
+      '12346_2024': true
     };
 
     const hamburger = document.getElementById('hamburger');
@@ -144,6 +115,7 @@
 
       const key = rollNo + '_' + passingYear;
       if (STUDENTS[key]) {
+        // Redirecting to result page
         window.location.href = 'result.html?roll=' + encodeURIComponent(rollNo) + '&year=' + encodeURIComponent(passingYear);
       } else {
         errorText.textContent = 'Record not found. Please verify the Roll Number and Passing Year.';
@@ -152,11 +124,6 @@
     }
 
     document.addEventListener('keydown', (e) => { if (e.key === 'Enter') verifyRecord(); });
-    ['rollNo','passingYear'].forEach(id => {
-      document.getElementById(id).addEventListener('input', () => {
-        document.getElementById('errorMsg').classList.remove('show');
-      });
-    });
   </script>
 </body>
 </html>

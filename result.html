@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Certificate – BSTE</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: Arial, sans-serif;
+      background: #f0f4f0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Top bar */
+    .topbar {
+      background: #124d2b;
+      color: #fff;
+      padding: .75rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+      flex-shrink: 0;
+    }
+    .topbar-brand { font-size: 1.1rem; font-weight: bold; letter-spacing: .04em; }
+    .topbar-brand span {
+      display: block;
+      font-size: .68rem;
+      font-weight: normal;
+      opacity: .72;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: .35rem;
+      color: #f5c518;
+      font-size: .85rem;
+      font-weight: bold;
+      text-decoration: none;
+    }
+    .back-link:hover { opacity: .75; }
+
+    /* Download bar */
+    .download-bar {
+      background: #1a6b3c;
+      padding: .7rem 1.25rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: .75rem;
+      flex-wrap: wrap;
+      flex-shrink: 0;
+    }
+    .download-bar p { color: rgba(255,255,255,.88); font-size: .88rem; }
+    .download-bar p strong { color: #f5c518; }
+    .btn-dl {
+      display: inline-flex;
+      align-items: center;
+      gap: .45rem;
+      background: #f5c518;
+      color: #111;
+      font-size: .88rem;
+      font-weight: bold;
+      padding: .55rem 1.35rem;
+      border-radius: 5px;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+    .btn-dl:hover { background: #e6b800; }
+
+    /* PDF iframe fills remaining height */
+    .pdf-wrap { flex: 1; display: flex; flex-direction: column; }
+    iframe { flex: 1; width: 100%; border: none; min-height: 80vh; display: block; }
+
+    /* Error box */
+    .error-wrap {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 3rem 1.5rem;
+    }
+    .error-box {
+      background: #fff;
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+      padding: 2.5rem 2rem;
+      max-width: 460px;
+      text-align: center;
+      box-shadow: 0 4px 20px rgba(0,0,0,.08);
+    }
+    .error-box h2 { color: #c0392b; margin-bottom: .75rem; font-size: 1.1rem; }
+    .error-box p  { color: #555; font-size: .9rem; margin-bottom: 1.4rem; line-height: 1.6; }
+    .btn-back {
+      display: inline-flex;
+      align-items: center;
+      gap: .4rem;
+      background: #1a6b3c;
+      color: #fff;
+      padding: .6rem 1.4rem;
+      border-radius: 5px;
+      font-weight: bold;
+      font-size: .88rem;
+      text-decoration: none;
+    }
+    .btn-back:hover { background: #124d2b; }
+  </style>
+</head>
+<body>
+
+  <!-- Always visible top bar -->
+  <div class="topbar">
+    <div class="topbar-brand">
+      BSTE
+      <span>Board of Science &amp; Technology Education</span>
+    </div>
+    <a href="verification.html" class="back-link">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      Back to Verification
+    </a>
+  </div>
+
+  <!-- PDF section (hidden until verified) -->
+  <div id="pdfSection" class="pdf-wrap" style="display:none;">
+    <div class="download-bar">
+      <p>Roll No: <strong id="rollLabel"></strong> — Certificate</p>
+      <a id="downloadBtn" href="#" download class="btn-dl">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/>
+          <polyline points="7 10 12 15 17 10"/>
+          <line x1="12" y1="15" x2="12" y2="3"/>
+        </svg>
+        Download Certificate
+      </a>
+    </div>
+    <iframe id="pdfFrame" src="" title="BSTE Certificate"></iframe>
+  </div>
+
+  <!-- Error section (hidden until needed) -->
+  <div id="errorSection" class="error-wrap" style="display:none;">
+    <div class="error-box">
+      <h2>⚠️ <span id="errorTitle">Record Not Found</span></h2>
+      <p id="errorMsg">Invalid verification details. Please go back and try again.</p>
+      <a href="verification.html" class="btn-back">← Go Back</a>
+    </div>
+  </div>
+
+<script>
+    // ================================================================
+    // STUDENT DATABASE (Key: 'rollNo_year')
+    // Naye students yahan add karte jayein
+    // ================================================================
+    const STUDENTS = {
+      '90625_2023': true,
+      '12345_2023': true,
+      '12346_2024': true
+    };
+
+    function showError(title, msg) {
+      // PDF section chhupayein aur error dikhayein
+      document.getElementById('pdfSection').style.display = 'none';
+      document.getElementById('errorTitle').textContent = title;
+      document.getElementById('errorMsg').textContent   = msg;
+      document.getElementById('errorSection').style.display = 'flex';
+    }
+
+    // URL se Roll aur Year nikalna
+    const params = new URLSearchParams(window.location.search);
+    const roll   = (params.get('roll') || '').trim();
+    const year   = (params.get('year') || '').trim();
+
+    if (!roll || !year) {
+      showError('Missing Details', 'Roll Number or passing year not found. Please go back and try again.');
+    } else if (!STUDENTS[roll + '_' + year]) {
+      showError('Record Not Found', 'Roll No ' + roll + ' and Year ' + year + ' record not found in our database.');
+    } else {
+      // GitHub Structure: Students/Pdf/DAE-EL90625.pdf
+      const folderPath = 'Students/Pdf/';
+      const fileName   = 'DAE-EL' + roll + '.pdf';
+      const pdfFile    = folderPath + fileName;
+
+      // GitHub Server par file check karne ke liye fetch
+      fetch(pdfFile, { method: 'HEAD' })
+        .then(res => {
+          if (!res.ok) throw new Error('File not found');
+
+          // Agar file mil gayi to UI update karein
+          document.getElementById('errorSection').style.display = 'none';
+          document.getElementById('pdfSection').style.display = 'flex';
+          
+          // Label par poora naam dikhane ke liye (DAE-EL90625)
+          document.getElementById('rollLabel').textContent = 'DAE-EL' + roll;
+          
+          // PDF Iframe mein load karein
+          document.getElementById('pdfFrame').src = pdfFile;
+
+          // Download button link update karein
+          const btn = document.getElementById('downloadBtn');
+          btn.href = pdfFile;
+          btn.setAttribute('download', 'BSTE_Certificate_' + fileName);
+        })
+        .catch(() => {
+          // Agar database mein entry ho lekin file folder mein na ho
+          showError('PDF Not Uploaded', 'Technical Issue: Certificate file (' + fileName + ') folder mein nahi mili. Meharbani karke Board Office se rabta karein.');
+        });
+    }
+</script>
+</body>
+</html>

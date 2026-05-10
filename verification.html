@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Certificate Verification – BSTE</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="site-title">
+        BSTE
+        <span>Board of Science &amp; Technology Education</span>
+      </div>
+      <nav class="main-nav" aria-label="Main navigation">
+        <a href="index.html">Home</a>
+        <a href="index.html#courses">Courses</a>
+        <a href="verification.html" class="active">Verification</a>
+        <a href="index.html#about">About</a>
+      </nav>
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <nav class="mobile-nav" id="mobileNav">
+      <a href="index.html">Home</a>
+      <a href="index.html#courses">Courses</a>
+      <a href="verification.html">Verification</a>
+      <a href="index.html#about">About</a>
+    </nav>
+  </header>
+
+  <section class="page-hero">
+    <div class="page-hero-content">
+      <span class="hero-badge">Online Services</span>
+      <h1>Certificate Verification</h1>
+      <p>Enter your Roll Number and Passing Year to verify the authenticity of your BSTE certificate.</p>
+    </div>
+  </section>
+
+  <section class="verify-section">
+    <div class="verify-card">
+      <h2>Verify Your Record</h2>
+      <p>Please enter the details exactly as they appear on your result card or certificate.</p>
+
+      <div class="form-group">
+        <label for="rollNo">Roll Number</label>
+        <input type="text" id="rollNo" placeholder="e.g. 12345" autocomplete="off" inputmode="numeric" />
+      </div>
+
+      <div class="form-group">
+        <label for="passingYear">Passing Year</label>
+        <input type="text" id="passingYear" placeholder="e.g. 2023" autocomplete="off" inputmode="numeric" maxlength="4" />
+      </div>
+
+      <button class="btn btn-secondary btn-full" onclick="verifyRecord()">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/>
+        </svg>
+        Verify Record
+      </button>
+
+      <div class="error-msg" id="errorMsg" role="alert">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/>
+        </svg>
+        <span id="errorText"></span>
+      </div>
+
+      <div class="hint-box">
+        <strong>🔍 Demo Credentials</strong>
+        Use Roll No: <strong>12345</strong> and Passing Year: <strong>2023</strong> to see the verification result.
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="footer-bottom" style="max-width:1280px;margin:0 auto;padding:1.2rem 2rem;">
+      <p>&copy; 2024 BSTE – Board of Science and Technology Education. All rights reserved.</p>
+      <span>Official Verification Portal &nbsp;|&nbsp; www.bste.com.pk</span>
+    </div>
+  </footer>
+
+  <script>
+    // ================================================================
+    // STUDENT DATABASE — naye students yahan add karein
+    // Key format: 'rollNo_year'
+    // PDF file naam: student{rollNo}.pdf  (root folder mein honi chahiye)
+    // ================================================================
+    const STUDENTS = {
+      '12345_2023': {
+        name:       'Muhammad Ali Khan',
+        fatherName: 'Abdul Rehman Khan',
+        rollNo:     '12345',
+        session:    '2021 – 2023',
+        regNo:      'BSTE-EL-2021-00892',
+        field:      'DAE – Electrical (03 Years)',
+        totalMarks: '1100',
+        obtained:   '924',
+        percentage: '84%',
+        grade:      'A',
+        year:       '2023',
+        docId:      'BSTE-VR-2023-12345'
+      },
+      '12346_2024': {
+        name:       'Ahmad Raza',
+        fatherName: 'Muhammad Raza',
+        rollNo:     '12346',
+        session:    '2022 – 2024',
+        regNo:      'BSTE-ME-2022-00456',
+        field:      'DAE – Mechanical (03 Years)',
+        totalMarks: '1100',
+        obtained:   '880',
+        percentage: '80%',
+        grade:      'B+',
+        year:       '2024',
+        docId:      'BSTE-VR-2024-12346'
+      }
+    };
+
+    const hamburger = document.getElementById('hamburger');
+    const mobileNav = document.getElementById('mobileNav');
+    hamburger.addEventListener('click', () => {
+      const isOpen = mobileNav.classList.toggle('open');
+      hamburger.classList.toggle('open', isOpen);
+      hamburger.setAttribute('aria-expanded', isOpen);
+    });
+
+    function verifyRecord() {
+      const rollNo      = document.getElementById('rollNo').value.trim();
+      const passingYear = document.getElementById('passingYear').value.trim();
+      const errorMsg    = document.getElementById('errorMsg');
+      const errorText   = document.getElementById('errorText');
+
+      errorMsg.classList.remove('show');
+
+      if (!rollNo || !passingYear) {
+        errorText.textContent = 'Please fill in both Roll Number and Passing Year.';
+        errorMsg.classList.add('show');
+        return;
+      }
+
+      const key = rollNo + '_' + passingYear;
+      if (STUDENTS[key]) {
+        window.location.href = 'result.html?roll=' + encodeURIComponent(rollNo) + '&year=' + encodeURIComponent(passingYear);
+      } else {
+        errorText.textContent = 'Record not found. Please verify the Roll Number and Passing Year.';
+        errorMsg.classList.add('show');
+      }
+    }
+
+    document.addEventListener('keydown', (e) => { if (e.key === 'Enter') verifyRecord(); });
+    ['rollNo','passingYear'].forEach(id => {
+      document.getElementById(id).addEventListener('input', () => {
+        document.getElementById('errorMsg').classList.remove('show');
+      });
+    });
+  </script>
+</body>
+</html>

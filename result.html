@@ -111,7 +111,7 @@
       document.getElementById('docId').textContent = s.docId;
 
       // PDF Setup (Assuming PDF is named like DAE-EL90625.pdf in Students/Pdf folder)
-      const pdfPath = 'Students/Pdf/DAE-EL' + s.rollNo + '.pdf';
+      const pdfPath = 'Students/Pdf/Stu' + s.rollNo + '.pdf';
       const dlBtn = document.getElementById('pdfDownloadBtn');
       dlBtn.href = pdfPath;
       dlBtn.setAttribute('download', 'BSTE_Certificate_' + s.rollNo + '.pdf');

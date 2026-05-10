@@ -52,7 +52,7 @@
 
       <div class="form-group">
         <label for="passingYear">Passing Year</label>
-        <input type="text" id="passingYear" placeholder="e.g. 2023" autocomplete="off" inputmode="numeric" maxlength="4" />
+        <input type="text" id="passingYear" placeholder="e.g. 2025" autocomplete="off" inputmode="numeric" maxlength="4" />
       </div>
 
       <button class="btn btn-secondary btn-full" onclick="verifyRecord()">
@@ -70,8 +70,8 @@
       </div>
 
       <div class="hint-box">
-        <strong>🔍 Demo Credentials</strong>
-        Use Roll No: <strong>90625</strong> and Passing Year: <strong>2023</strong> to see the result.
+        <strong>🔍 Demo Records</strong><br>
+        90625 (2025), 90626 (2024), 90627 (2023), 90628 (2025), 90629 (2024), 90630 (2023), 90631 (2025), 90632 (2024), 90633 (2023), 90634 (2025)
       </div>
     </div>
   </section>
@@ -84,11 +84,18 @@
   </footer>
 
   <script>
-    // Database sync with Result.html
+    // Database sync with Result.html (10 Students Demo)
     const STUDENTS = {
-      '90625_2023': true,
-      '12345_2023': true,
-      '12346_2024': true
+      '90625_2025': true,
+      '90626_2024': true,
+      '90627_2023': true,
+      '90628_2025': true,
+      '90629_2024': true,
+      '90630_2023': true,
+      '90631_2025': true,
+      '90632_2024': true,
+      '90633_2023': true,
+      '90634_2025': true
     };
 
     const hamburger = document.getElementById('hamburger');
@@ -115,7 +122,6 @@
 
       const key = rollNo + '_' + passingYear;
       if (STUDENTS[key]) {
-        // Redirecting to result page
         window.location.href = 'result.html?roll=' + encodeURIComponent(rollNo) + '&year=' + encodeURIComponent(passingYear);
       } else {
         errorText.textContent = 'Record not found. Please verify the Roll Number and Passing Year.';
